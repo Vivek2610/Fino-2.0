@@ -1,0 +1,27 @@
+{
+  "name": "fino-jewellery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FINO JEWELLERY — cinematic B2B fine-jewellery website",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@sanity/client": "^8.14.1",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/webhook": "^4.0.4",
+    "gsap": "3.13.0",
+    "next": "15.5.4",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.18.0",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "typescript": "5.9.2"
+  }
+}

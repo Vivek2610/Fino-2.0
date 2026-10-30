@@ -1,0 +1,19 @@
+# ---- secrets: never commit ----
+.env
+.env.*
+!.env.example
+*.pem
+
+# ---- dependencies & build output ----
+node_modules/
+.next/
+out/
+dist/
+.sanity/
+*.tsbuildinfo
+next-env.d.ts
+
+# ---- logs & OS files ----
+*.log
+.DS_Store
+Thumbs.db

@@ -91,7 +91,9 @@ The location section shows a dotted world map (`public/images/world-dots.svg`, g
 | `NEXT_PUBLIC_SITE_URL` | Production URL. Used for canonical URLs, sitemap and Open Graph. |
 | `CONTACT_WEBHOOK_URL` | Option A: contact form POSTs JSON here (Zapier, Make, a CRM…) |
 | `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` | Option B: send enquiries by email via Resend |
-| `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION` | Sanity connection (project `x7hz1fx7`, dataset `production`) |
+| `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`, `RECAPTCHA_SECRET_KEY`, `NEXT_PUBLIC_RECAPTCHA_VERSION` | Google reCAPTCHA (v2 checkbox, default, or v3 invisible) on the contact form, verified on the server. Leave keys empty to disable. |
+| `SANITY_API_WRITE_TOKEN` | Saves every enquiry to the studio's **Enquiries** inbox (private: IDs start with `enquiry.`). Works alongside email/webhook; the visitor sees success if at least one succeeds. |
+| `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION` | Sanity connection (project `2b5hsmi7`, dataset `production`) |
 | `SANITY_API_READ_TOKEN` | Optional Viewer token. Only needed if the dataset is made private. |
 | `SANITY_API_WRITE_TOKEN` | Editor token, only for `scripts/seed-sanity.mjs`. Remove it afterwards. |
 | `SANITY_REVALIDATE_SECRET` | Shared secret for the publish webhook (`/api/revalidate`) |
@@ -100,7 +102,7 @@ Until one delivery option is configured, the form validates and then honestly re
 
 ## Sanity CMS
 
-The content lives in Sanity (project `x7hz1fx7`, dataset `production`). The editing dashboard, called the studio, is the sibling folder `studio-fino-jewellery`.
+The content lives in Sanity (project `2b5hsmi7`, dataset `production`). The editing dashboard, called the studio, is the sibling folder `studio-fino-jewellery`.
 
 **Folder layout**
 

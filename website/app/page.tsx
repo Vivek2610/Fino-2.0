@@ -4,7 +4,7 @@ import CollectionSection from "@/components/home/CollectionSection";
 import CraftVideoSection from "@/components/home/CraftVideoSection";
 import TeamSection from "@/components/home/TeamSection";
 import LocationSection from "@/components/home/LocationSection";
-import ContactSection from "@/components/home/ContactSection";
+import BlogSection from "@/components/home/BlogSection";
 import CinematicNecklaceJourney from "@/components/motion/CinematicNecklaceJourney";
 import { getHomeContent } from "@/lib/content";
 import { getSiteSettings } from "@/lib/settings";
@@ -41,7 +41,7 @@ export default async function HomePage() {
         <CraftVideoSection content={home.craft} />
         <TeamSection content={home.team} />
         <LocationSection content={home.location} />
-        <ContactSection heading={home.contact.heading} />
+        <BlogSection content={home.blog} />
       </main>
     </>
   );

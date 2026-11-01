@@ -1,5 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import PhoneLink from "@/components/layout/PhoneLink";
+import { PhoneIcon, WhatsAppIcon } from "@/components/layout/PhoneActions";
+import { whatsappUrl } from "@/lib/site-config";
 import { formattedAddress } from "@/lib/site-config";
 import { getSiteSettings } from "@/lib/settings";
 
@@ -24,10 +27,27 @@ export default async function Footer() {
           <li><Link href="/collection">Collection</Link></li>
           <li><Link href="/our-team">Our team</Link></li>
           <li><Link href="/blog">Blog</Link></li>
-          <li><Link href="/contact?subject=Trade%20partnership">Trade partnership</Link></li>
-          <li><Link href="/contact">Contact</Link></li>
           <li><Link href="/privacy-policy">Privacy policy</Link></li>
           <li><Link href="/terms">Terms</Link></li>
+          {siteConfig.contact.phone && (
+            <li className="footer__phone">
+              <PhoneLink phone={siteConfig.contact.phone} whatsapp={siteConfig.contact.whatsapp} />
+              {whatsappUrl(siteConfig.contact.whatsapp || siteConfig.contact.phone) && (
+                <a
+                  className="footer__icon"
+                  href={whatsappUrl(siteConfig.contact.whatsapp || siteConfig.contact.phone, "Hello FINO JEWELLERY, I'd like to enquire about your collection.")!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat on WhatsApp (opens in a new tab)"
+                >
+                  <WhatsAppIcon />
+                </a>
+              )}
+              <a className="footer__icon" href={`tel:${siteConfig.contact.phone.replace(/[^\d+]/g, "")}`} aria-label="Call us">
+                <PhoneIcon />
+                </a>
+            </li>
+          )}
           {siteConfig.contact.email && (
             <li><a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a></li>
           )}

@@ -1420,7 +1420,8 @@ html.fx-ready .fx-static {
 }
 @media (min-width: 900px) {
   .footer__links {
-    grid-template-columns: repeat(7, auto);
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 }
@@ -2321,4 +2322,19 @@ a.eyebrow {
   display: grid;
   gap: 20px;
   justify-items: start;
+}
+
+.footer__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.footer__links .footer__icon {
+  justify-content: center;
+  width: 44px;
+  letter-spacing: 0;
+  color: var(--gold);
+}
+.footer__links .footer__icon:hover {
+  color: var(--on-dark);
 }

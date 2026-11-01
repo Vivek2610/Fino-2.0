@@ -1,6 +1,7 @@
 import ContactForm from "@/components/forms/ContactForm";
 import { formattedAddress } from "@/lib/site-config";
 import { getSiteSettings } from "@/lib/settings";
+import PhoneActions from "@/components/layout/PhoneActions";
 import Title from "@/components/content/Title";
 import type { Heading } from "@/lib/content";
 
@@ -30,9 +31,9 @@ export default async function ContactSection({ heading: h, headingLevel = 2 }: {
             </div>
             {siteConfig.contact.phone && (
               <div>
-                <dt>Telephone</dt>
+                <dt>WhatsApp / phone</dt>
                 <dd>
-                  <a href={`tel:${siteConfig.contact.phone.replace(/\s/g, "")}`}>{siteConfig.contact.phone}</a>
+                  <PhoneActions phone={siteConfig.contact.phone} whatsapp={siteConfig.contact.whatsapp} />
                 </dd>
               </div>
             )}

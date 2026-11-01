@@ -1,0 +1,85 @@
+/* Phone number with WhatsApp + Call actions — forest & gold, square edges like .btn */
+.wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 4px;
+}
+.number {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: clamp(1.4rem, 1.15rem + 0.8vw, 1.75rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-deep);
+  font: 600 0.62rem/1 var(--font-sans), sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.35s var(--ease), color 0.35s var(--ease), border-color 0.35s var(--ease),
+    transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.btn svg {
+  flex: none;
+  transition: transform 0.35s var(--ease);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -14px rgba(6, 35, 20, 0.45);
+}
+.btn:hover svg {
+  transform: scale(1.12);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+/* primary: WhatsApp */
+.wa {
+  background: var(--forest-2, #0b3821);
+  border-color: var(--forest-2, #0b3821);
+  color: var(--gold);
+}
+.wa:hover {
+  background: var(--green, #214a3b);
+  border-color: var(--green, #214a3b);
+  color: var(--gold-soft);
+}
+/* secondary: Call */
+.call:hover {
+  background: var(--linen);
+  border-color: var(--gold-deep);
+}
+.hint {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--body);
+  opacity: 0.8;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn svg {
+    transition: none;
+  }
+  .btn:hover,
+  .btn:hover svg {
+    transform: none;
+  }
+}

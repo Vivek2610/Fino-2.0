@@ -1,0 +1,17 @@
+.wrap {
+  display: grid;
+  gap: 10px;
+}
+.box {
+  min-height: 78px; /* reserve the checkbox's space so the form doesn't jump */
+}
+.note {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--body);
+  opacity: 0.8;
+}
+.note a {
+  color: var(--gold-deep);
+}

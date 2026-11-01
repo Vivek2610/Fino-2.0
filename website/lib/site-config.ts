@@ -37,6 +37,7 @@ export const siteConfig = {
   contact: {
     email: null as string | null, // e.g. "trade@yourdomain.com"
     phone: null as string | null, // e.g. "+39 ..."
+    whatsapp: null as string | null, // optional; defaults to the phone number
   },
   /** The brand has ONE physical location. */
   location: {
@@ -103,4 +104,16 @@ export function formattedAddress(cfg: SiteConfig = siteConfig): string | null {
   return [l.streetAddress, [l.postalCode, l.city].filter(Boolean).join(" "), l.country]
     .filter(Boolean)
     .join(", ");
+}
+
+/**
+ * WhatsApp click-to-chat link for a phone number (works on mobile and desktop:
+ * opens the WhatsApp app, or WhatsApp Web / Desktop). Needs the international
+ * format with country code. Returns null when the number is unusable.
+ */
+export function whatsappUrl(number: string | null | undefined, message?: string): string | null {
+  if (!number) return null;
+  const digits = number.replace(/\D/g, "").replace(/^00/, "");
+  if (digits.length < 8 || digits.length > 15) return null;
+  return `https://wa.me/${digits}${message ? `?text=${encodeURIComponent(message)}` : ""}`;
 }

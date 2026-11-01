@@ -32,7 +32,7 @@ export const POSTS_QUERY = `*[_type == "post" && defined(slug.current) && ${PUBL
   }`;
 
 export const SETTINGS_QUERY = `*[_id == "siteSettings"][0]{
-  description, social[]{ label, href }, email, phone,
+  description, social[]{ label, href }, email, phone, whatsapp,
   location { name, streetAddress, city, postalCode, country, openingHours, mapUrl, lat, lon, image ${IMAGE} },
   deliveryHeadline, deliveryNote, markets[]{ name, lat, lon, primary },
   "craftVideo": craftVideo.asset->url, craftPoster ${IMAGE}, defaultOgImage ${IMAGE}
@@ -45,7 +45,7 @@ export const HOME_QUERY = `*[_id == "homePage"][0]{
   craft { heading ${HEADING}, quote },
   team { heading ${HEADING}, ctaLabel },
   location { heading ${HEADING}, houseNote },
-  contact { heading ${HEADING} },
+  blog { heading ${HEADING}, ctaLabel },
   ${SEO}
 }`;
 

@@ -1,3 +1,4 @@
+import PhoneActions from "@/components/layout/PhoneActions";
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig, formattedAddress } from "@/lib/site-config";
@@ -98,9 +99,7 @@ export default async function LocationSection({ content }: { content: HomeConten
                   {c.email || c.phone ? (
                     <>
                       {c.phone && (
-                        <a href={`tel:${c.phone.replace(/\s/g, "")}`} style={{ display: "block" }}>
-                          {c.phone}
-                        </a>
+                        <PhoneActions phone={c.phone} whatsapp={c.whatsapp} />
                       )}
                       {c.email && <a href={`mailto:${c.email}`}>{c.email}</a>}
                     </>
@@ -116,7 +115,7 @@ export default async function LocationSection({ content }: { content: HomeConten
                   Get directions
                 </a>
               ) : null}
-              <Link className="btn btn--light" href="#contact">
+              <Link className="btn btn--light" href="/contact">
                 Send an enquiry
               </Link>
             </div>

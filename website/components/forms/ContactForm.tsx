@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Recaptcha, { RECAPTCHA_SITE_KEY, RECAPTCHA_VERSION, type RecaptchaHandle } from "./Recaptcha";
 import { validateContact, LIMITS, type FieldErrors, type ContactInput } from "@/lib/validation";
 
 type Status = { kind: "idle" } | { kind: "sending" } | { kind: "success" } | { kind: "error"; message: string };
@@ -11,6 +12,8 @@ export default function ContactForm() {
   const [subject, setSubject] = useState("");
   const startedAt = useRef<number>(0);
   const statusRef = useRef<HTMLDivElement>(null);
+  const captcha = useRef<RecaptchaHandle>(null);
+  const [captchaFailed, setCaptchaFailed] = useState(false);
 
   useEffect(() => {
     startedAt.current = Date.now();
@@ -35,11 +38,23 @@ export default function ContactForm() {
       return;
     }
     setStatus({ kind: "sending" });
+    const token = RECAPTCHA_SITE_KEY ? await captcha.current?.getToken() : null;
+    if (RECAPTCHA_SITE_KEY && !token) {
+      setStatus({
+        kind: "error",
+        message: captchaFailed
+          ? "The security check could not load. Please check your connection, refresh the page and try again."
+          : RECAPTCHA_VERSION === "v2"
+            ? "Please tick “I'm not a robot” before sending."
+            : "The security check is still loading. Please press Send again in a moment.",
+      });
+      return;
+    }
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...raw, elapsed: Date.now() - startedAt.current }),
+        body: JSON.stringify({ ...raw, elapsed: Date.now() - startedAt.current, recaptchaToken: token }),
       });
       const body = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; errors?: FieldErrors };
       if (res.ok && body.ok) {
@@ -53,6 +68,8 @@ export default function ContactForm() {
     } catch {
       setStatus({ kind: "error", message: "Network error — your message was not sent. Please try again." });
     }
+    // A token can be used only once — get a fresh one for the next send.
+    captcha.current?.reset();
   }
 
   const field = (name: keyof ContactInput) => ({
@@ -100,6 +117,7 @@ export default function ContactForm() {
         <label htmlFor="cf-website">Website</label>
         <input id="cf-website" name="website" tabIndex={-1} autoComplete="off" suppressHydrationWarning />
       </div>
+      <Recaptcha ref={captcha} onError={() => setCaptchaFailed(true)} />
       <div ref={statusRef} tabIndex={-1} aria-live="polite">
         {status.kind === "success" && (
           <p className="form__status">Thank you — your message has been sent. The FINO team will be in touch.</p>

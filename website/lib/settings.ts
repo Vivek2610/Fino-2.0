@@ -10,6 +10,7 @@ type RawSettings = {
   social: { label: string; href: string }[] | null;
   email: string | null;
   phone: string | null;
+  whatsapp: string | null;
   location: {
     name: string | null; streetAddress: string | null; city: string | null; postalCode: string | null;
     country: string | null; openingHours: string[] | null; mapUrl: string | null;
@@ -41,6 +42,7 @@ export const getSiteSettings = cache(async (): Promise<SiteConfig> => {
     contact: {
       email: text(raw.email) ?? d.contact.email,
       phone: text(raw.phone) ?? d.contact.phone,
+      whatsapp: text(raw.whatsapp) ?? d.contact.whatsapp,
     },
     location: {
       name: text(l?.name) ?? d.location.name,

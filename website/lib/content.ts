@@ -29,7 +29,9 @@ function heading(raw: RawHeading | undefined, d: Heading): Heading {
   };
 }
 const cta = (raw: RawCta | undefined, d: Cta): Cta =>
-  text(raw?.label) && text(raw?.href) ? { label: text(raw!.label)!, href: text(raw!.href)! } : d;
+  text(raw?.label) && text(raw?.href)
+    ? { label: text(raw!.label)!, href: text(raw!.href)! === "#contact" ? "/contact" : text(raw!.href)! }
+    : d;
 
 /* ------------------------------------------------------------------ */
 /* Home page                                                           */
@@ -41,7 +43,7 @@ export const HOME_DEFAULTS = {
     emphasis: "Golden by Design." as string | undefined,
     lead: "FINO JEWELLERY creates fine gold jewellery for jewellers and retailers — composed with Italian restraint and a quiet touch of Arabian elegance.",
     primaryCta: { label: "Discover our collection", href: "#collection" },
-    secondaryCta: { label: "Partner with FINO", href: "#contact" },
+    secondaryCta: { label: "Partner with FINO", href: "/contact" },
   },
   story: {
     heading: {
@@ -63,7 +65,7 @@ export const HOME_DEFAULTS = {
       { title: "Partnership", label: "Built for the trade" },
       { title: "Gold", label: "At the heart of it all" },
     ],
-    cta: { label: "Become a trade partner", href: "#contact" },
+    cta: { label: "Become a trade partner", href: "/contact" },
   },
   collection: {
     heading: {
@@ -102,14 +104,14 @@ export const HOME_DEFAULTS = {
     } as Heading,
     houseNote: "Trade partners are welcome by appointment at our single location.",
   },
-  contact: {
+  blog: {
     heading: {
-      eyebrow: "Contact",
-      title: "Begin a",
-      emphasis: "conversation",
-      intro:
-        "For trade partnerships, collection enquiries or an appointment, write to us and the FINO team will reply.",
+      eyebrow: "The FINO Journal",
+      title: "Our",
+      emphasis: "blogs",
+      intro: "Stories, guides and ideas on gold, design and the trade.",
     } as Heading,
+    ctaLabel: "Read all articles",
   },
   seo: undefined as Seo | undefined,
 };
@@ -122,7 +124,7 @@ type RawHome = {
   craft: { heading: RawHeading; quote: string | null } | null;
   team: { heading: RawHeading; ctaLabel: string | null } | null;
   location: { heading: RawHeading; houseNote: string | null } | null;
-  contact: { heading: RawHeading } | null;
+  blog: { heading: RawHeading; ctaLabel: string | null } | null;
   seo: RawSeo;
 } | null;
 
@@ -161,7 +163,7 @@ export const getHomeContent = cache(async (): Promise<HomeContent> => {
       heading: heading(r.location?.heading, d.location.heading),
       houseNote: text(r.location?.houseNote) ?? d.location.houseNote,
     },
-    contact: { heading: heading(r.contact?.heading, d.contact.heading) },
+    blog: { heading: heading(r.blog?.heading, d.blog.heading), ctaLabel: text(r.blog?.ctaLabel) ?? d.blog.ctaLabel },
     seo: mapSeo(r.seo),
   };
 });
@@ -201,7 +203,12 @@ export const LISTING_DEFAULTS = {
     meta: { title: "Blog", description: "Stories on fine gold jewellery, design and the trade from FINO JEWELLERY." },
   },
   "page-contact": {
-    heading: HOME_DEFAULTS.contact.heading,
+    heading: {
+      eyebrow: "Contact",
+      title: "Begin a",
+      emphasis: "conversation",
+      intro: "For trade partnerships, collection enquiries or an appointment, write to us and the FINO team will reply.",
+    },
     meta: {
       title: "Contact",
       description: "Contact FINO JEWELLERY about trade partnerships, collection enquiries or an appointment.",

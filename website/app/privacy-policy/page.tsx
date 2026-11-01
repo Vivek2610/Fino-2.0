@@ -26,7 +26,9 @@ export default async function PrivacyPage() {
       <h2>What this website collects</h2>
       <p>
         When you use the contact form we receive the name, email address, subject and message you enter, so we can
-        reply to your enquiry. The website does not use advertising or analytics cookies.
+        reply to your enquiry. Enquiries are stored securely in the content management system we use (Sanity),
+        where only authorised FINO JEWELLERY staff can see them, and may also be forwarded to our email inbox. The
+        website does not use advertising or analytics cookies. Contact-form submissions are checked by Google reCAPTCHA to block automated spam. reCAPTCHA collects hardware and software information (such as device and browser data) and sends it to Google for analysis; Google's Privacy Policy and Terms of Service apply.
       </p>
       <h2>How it is used</h2>
       <p>Enquiry details are used only to respond to you and to manage any resulting trade relationship.</p>
